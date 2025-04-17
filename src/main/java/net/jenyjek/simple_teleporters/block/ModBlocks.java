@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.jenyjek.simple_teleporters.SimpleTeleporters;
+import net.jenyjek.simple_teleporters.block.custom.ArcstoneChestBlock;
 import net.jenyjek.simple_teleporters.block.custom.TeleporterBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -19,6 +20,8 @@ public class ModBlocks {
 
     public static final Block arcstoneBlock = registerBlock("arcstone_block", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS)));
     public static final Block teleporterBlock = Registry.register(Registries.BLOCK, new Identifier(SimpleTeleporters.MOD_ID, "teleporter"), new TeleporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().luminance(5)));
+
+    public static final Block arcstoneChestBlock = Registry.register(Registries.BLOCK, new Identifier(SimpleTeleporters.MOD_ID, "arcstone_chest"), new ArcstoneChestBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().luminance(5)));
 
     public static final Block chargedArcstoneBlock = registerBlock("charged_arcstone_block", new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS).luminance(12).emissiveLighting(Blocks::always)));
 

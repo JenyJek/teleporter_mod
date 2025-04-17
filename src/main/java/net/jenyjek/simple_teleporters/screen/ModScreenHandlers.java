@@ -16,6 +16,10 @@ public class ModScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(SimpleTeleporters.MOD_ID, "teleporter_screen"),
                     new ExtendedScreenHandlerType<>(TeleporterScreenHandler::new));
 
+    public static final ScreenHandlerType<ArcstoneChestScreenHandler> arcstoneChestScreen =
+            Registry.register(Registries.SCREEN_HANDLER, new Identifier(SimpleTeleporters.MOD_ID, "arcstone_chest_screen"),
+                    new ExtendedScreenHandlerType<>(ArcstoneChestScreenHandler::new));
+
     public static void registerAllScreenHandlers(){
     }
 }

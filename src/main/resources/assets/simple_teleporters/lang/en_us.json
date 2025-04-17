@@ -9,6 +9,7 @@
   "item.simple_teleporters.cartridge" : "Cartridge",
 
   "block.simple_teleporters.teleporter" : "Teleporter",
+  "block.simple_teleporters.arcstone_chest" : "Arcstone chest",
 
   "item.simple_teleporters.oxidised_copper_ingot" : "Oxidized copper ingot",
 

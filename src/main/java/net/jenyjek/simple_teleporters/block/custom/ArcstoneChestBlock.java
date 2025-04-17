@@ -1,14 +1,10 @@
 package net.jenyjek.simple_teleporters.block.custom;
 
-import net.jenyjek.simple_teleporters.block.entity.ModBlockEntities;
+import net.jenyjek.simple_teleporters.block.entity.ArcstoneChestBlockEntity;
 import net.jenyjek.simple_teleporters.block.entity.TeleporterBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -20,23 +16,20 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+public class ArcstoneChestBlock extends BlockWithEntity implements BlockEntityProvider {
 
-public class TeleporterBlock extends BlockWithEntity implements BlockEntityProvider {
-
-    public TeleporterBlock(Settings settings) {
+    public ArcstoneChestBlock(Settings settings) {
         super(settings);
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Block.createCuboidShape(0, 0, 0, 16, 2, 16);
+        return Block.createCuboidShape(1, 0, 1, 15, 12 ,15);
     }
-
-    //BLOCK ENTITY STUFF GO FUCK YOURSELF IF CHANGED
 
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new TeleporterBlockEntity(pos, state);
+        return new ArcstoneChestBlockEntity(pos, state);
     }
 
     @Override
@@ -48,8 +41,8 @@ public class TeleporterBlock extends BlockWithEntity implements BlockEntityProvi
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof TeleporterBlockEntity) {
-                ItemScatterer.spawn(world, pos, (TeleporterBlockEntity)blockEntity);
+            if (blockEntity instanceof ArcstoneChestBlockEntity) {
+                ItemScatterer.spawn(world, pos, (ArcstoneChestBlockEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -65,25 +58,5 @@ public class TeleporterBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }
         return ActionResult.SUCCESS;
-    }
-
-    @Override
-    @Nullable
-    public  <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.teleporterBlockEntity,
-                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos));
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-
-
-        super.onPlaced(world, pos, state, placer, itemStack);
-
-        BlockPos apos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-        Block above = world.getBlockState(apos).getBlock();
-        if (!above.equals(Blocks.AIR) && above.getBlastResistance() < 120) {
-            world.breakBlock(apos, true);
-        }
     }
 }

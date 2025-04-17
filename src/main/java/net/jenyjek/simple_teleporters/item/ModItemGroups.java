@@ -26,6 +26,7 @@ public class ModItemGroups {
                         entries.add(ModItems.teleporterCapacityUpgrade);
                         entries.add(ModItems.teleporterSpeedUpgrade);
                         entries.add(ModItems.teleporterCooldownUpgrade);
+                        entries.add(ModBlocks.arcstoneChestBlock);
                     }).build());
 
     public static void registerItemGroups(){

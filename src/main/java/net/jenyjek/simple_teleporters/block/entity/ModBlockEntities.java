@@ -8,11 +8,15 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+
 public class ModBlockEntities {
     public static final BlockEntityType<TeleporterBlockEntity> teleporterBlockEntity = Registry.register(Registries.BLOCK_ENTITY_TYPE,
             new Identifier(SimpleTeleporters.MOD_ID, "teleporter_block_entity"),FabricBlockEntityTypeBuilder.create(TeleporterBlockEntity::new,
                     ModBlocks.teleporterBlock).build());
 
+    public static final BlockEntityType<ArcstoneChestBlockEntity> arcstoneChestBlockEntity = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+            new Identifier(SimpleTeleporters.MOD_ID, "arcstone_chest_block_entity"),FabricBlockEntityTypeBuilder.create(ArcstoneChestBlockEntity::new,
+                    ModBlocks.arcstoneChestBlock).build());
     public static void registerAllBlockEntities(){
 
     }
