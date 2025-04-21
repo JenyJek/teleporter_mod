@@ -2,6 +2,9 @@ package net.jenyjek.simple_teleporters.screen;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.jenyjek.simple_teleporters.SimpleTeleporters;
+import net.jenyjek.simple_teleporters.block.entity.ArcstoneChestBlockEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -9,13 +12,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+
+import java.util.logging.Logger;
 
 
 public class ArcstoneChestScreenHandler extends ScreenHandler {
     private final Inventory inventory;
+    private final ArcstoneChestBlockEntity blockEntity;
 
     public ArcstoneChestScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf){
-        this(syncId, inventory, (Inventory) inventory.player.getWorld().getBlockEntity(buf.readBlockPos()));
+        this(syncId, inventory, (ArcstoneChestBlockEntity) inventory.player.getWorld().getBlockEntity(buf.readBlockPos()));
     }
 
 
@@ -44,10 +52,14 @@ public class ArcstoneChestScreenHandler extends ScreenHandler {
         return newStack;
     }
 
-    public ArcstoneChestScreenHandler( int syncId, PlayerInventory playerInventory, Inventory inventory) {
+    public ArcstoneChestScreenHandler( int syncId, PlayerInventory playerInventory, ArcstoneChestBlockEntity blockEntity) {
         super(ModScreenHandlers.arcstoneChestScreen, syncId);
+
+        this.inventory = (Inventory) blockEntity;
+        this.blockEntity = blockEntity;
+
         checkSize(inventory, 81);
-        this.inventory = inventory;
+
         inventory.onOpen(playerInventory.player);
 
         for (int i = 0; i < 9; ++i) {
@@ -65,6 +77,14 @@ public class ArcstoneChestScreenHandler extends ScreenHandler {
     public boolean canUse(PlayerEntity player) {
         //return this.inventory.canPlayerUse(player);
         return true;
+    }
+
+    @Override
+    public void onClosed(PlayerEntity player) {
+        super.onClosed(player);
+        if (!player.getWorld().isClient && blockEntity != null) {
+            blockEntity.closeChest(player); // play animation, sound, etc.
+        }
     }
 
     private void addPlayerInventory(PlayerInventory playerInventory) {

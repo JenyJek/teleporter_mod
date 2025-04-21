@@ -53,7 +53,6 @@ public class ArcstoneChestScreen extends HandledScreen<ArcstoneChestScreenHandle
         renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context,mouseX, mouseY);
-        context.drawBorder(this.x, this.y, this.backgroundWidth, this.backgroundHeight, 0xFFFF0000);
     }
 
     @Override
