@@ -3,6 +3,7 @@
   "values": [
     "simple_teleporters:arcstone_block",
     "simple_teleporters:teleporter",
-    "simple_teleporters:charged_arcstone_block"
+    "simple_teleporters:charged_arcstone_block",
+    "simple_teleporters:arcstone_chest"
   ]
 }

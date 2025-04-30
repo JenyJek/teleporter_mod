@@ -111,6 +111,6 @@
     }
   },
   "textures": {
-    "particle": "item/texture"
+    "particle": "textures/block/arcstone_chest.png"
   }
 }

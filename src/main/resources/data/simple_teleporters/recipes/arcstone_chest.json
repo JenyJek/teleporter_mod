@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bbb",
+    "b b",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "simple_teleporters:arcstone_block"
+    }
+  },
+  "result": {
+    "item": "simple_teleporters:arcstone_chest",
+    "count": 2
+  }
+}

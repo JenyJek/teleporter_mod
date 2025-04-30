@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "simple_teleporters:teleporter"
+    "simple_teleporters:teleporter",
+    "simple_teleporters:arcstone_chest"
   ]
 }
